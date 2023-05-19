@@ -1,10 +1,10 @@
 import React from 'react'; 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import NotFound from './pages/NotFound';
-import Nav from './components/Layout/Nav';
+import Nav from './components/Layout/Navbar';
 import TaskPage from './pages/MyPage';
 import { ApolloProvider, ApolloClient, InMemoryCache,} from '@apollo/client';
 
@@ -20,13 +20,13 @@ function App() {
     <Router>
       <div className="App">
         <Nav />
-        <Switch>
+        <Routes>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/tasks" component={TaskPage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/signup" component={SignupPage} />
           <Route component={NotFound} />
-        </Switch>
+        </Routes>
       </div>
     </Router>
     </ApolloProvider>

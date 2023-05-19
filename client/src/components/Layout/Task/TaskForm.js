@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { ADD_TASK } from '../../graphql/mutations';
+import { CREATE_TASK } from '../../../utils/mutations';
 
 const TaskForm = () => {
     const [formState, setFormState] = useState({ title: '', description: '' });

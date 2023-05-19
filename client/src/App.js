@@ -21,10 +21,10 @@ function App() {
       <div className="App">
         <Nav />
         <Routes>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/tasks" component={TaskPage} />
-          <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/signup" component={SignupPage} />
+          <Route exact path="/" component={< HomePage />} />
+          <Route exact path="/tasks" component={< TaskPage />} />
+          <Route exact path="/login" component={< LoginPage />} />
+          <Route exact path="/signup" component={< SignupPage />} />
           <Route component={NotFound} />
         </Routes>
       </div>

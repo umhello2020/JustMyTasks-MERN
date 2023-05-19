@@ -10,13 +10,13 @@ const resolvers = {
         },
         tasks: async (parent, args, context) => {
             if (context.user) {
-                return Task.find({ user: context.user._id });
+                return Task.find({ user: context.user.userId });
             }
             throw new AuthenticationError('You need to be logged in!');
         },
         me: async (parent, args, context) => {
             if (context.user) {
-                return User.findById(context.user._id).populate('tasks');
+                return User.findById(context.user.userId).populate('tasks');
             }
             throw new AuthenticationError('You need to be logged in!');
         },
@@ -30,7 +30,7 @@ const resolvers = {
         updateUser: async (parent, { username, email, password }, context) => {
             if (context.user) {
                 return User.findByIdAndUpdate(
-                    context.user._id,
+                    context.user.userId,
                     { username, email, password },
                     { new: true }
                 );
@@ -59,11 +59,11 @@ const resolvers = {
                 const task = await Task.create({
                     title,
                     description,
-                    user: context.user._id,
+                    user: context.user.userId,
                 });
 
-                await User.findByIdAndUpdate(context.user._id, {
-                    $push: { tasks: task._id },
+                await User.findByIdAndUpdate(context.user.userId, {
+                    $push: { tasks: task.taskId },
                 });
 
                 return task;
@@ -83,8 +83,8 @@ const resolvers = {
             if (context.user) {
                 const task = await Task.findByIdAndRemove(taskId);
 
-                await User.findByIdAndUpdate(context.user._id, {
-                    $pull: { tasks: task._id },
+                await User.findByIdAndUpdate(context.user.userId, {
+                    $pull: { tasks: task.taskId },
                 });
 
                 return task;
@@ -104,7 +104,7 @@ const resolvers = {
             const donation = new Donation({
                 task: taskId,
                 amount,
-                user: context.user._id,
+                user: context.user.userId,
             });
 
             await donation.save();
@@ -117,7 +117,7 @@ const resolvers = {
                 metadata: {
                     donationId: donation._id.toString(),
                     taskId: taskId.toString(),
-                    userId: context.user._id.toString(),
+                    userId: context.user.userId.toString(),
                 },
             });
 

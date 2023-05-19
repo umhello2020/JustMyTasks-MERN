@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import { GET_TASKS } from '../graphql/queries';
+import { GET_TASKS } from '../utils/queries';
 import TaskList from '../components/Layout/Task/TaskList';
 import TaskForm from '../components/Layout/Task/TaskForm';
 

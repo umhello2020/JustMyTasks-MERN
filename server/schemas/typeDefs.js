@@ -7,7 +7,7 @@ const typeDefs = gql`
   }
 
   type User {
-    _id: ID
+    userId: ID!
     username: String!
     email: String!
     taskCount: Int!
@@ -37,7 +37,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createUser(username: String!, email: String!, password: String!): Auth
+    createUser(userId: ID!, username: String!, email: String!, password: String!): Auth
     updateUser(username: String!, email: String!, password: String!): User
     login(email: String!, password: String!): Auth
     createTask(title: String!, description: String!): Task

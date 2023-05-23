@@ -1,0 +1,40 @@
+.taskFormContainer {
+    margin-top: 20px;
+  }
+  
+  .taskFormTitle {
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .taskFormInput {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .taskFormTextarea {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .taskFormButton {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .taskFormButton:hover {
+    background-color: #0056b3;
+  }
+  

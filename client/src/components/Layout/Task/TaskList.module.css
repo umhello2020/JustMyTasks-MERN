@@ -1,0 +1,29 @@
+.taskListContainer {
+    margin-top: 20px;
+  }
+  
+  .taskItem {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+  }
+  
+  .taskItemTitle {
+    font-weight: bold;
+  }
+  
+  .taskItemDescription {
+    margin-top: 5px;
+    color: #555;
+  }
+  
+  .taskItemActions {
+    margin-top: 10px;
+  }
+  
+  .taskItemButton {
+    margin-right: 5px;
+  }
+  

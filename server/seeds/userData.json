@@ -1,9 +1,0 @@
-[
-    {
-        "userId": 1,
-        "username": "mary_smith",
-        "email": "mary_smith@email.com",
-        "password": "password1",
-        "tasks": [1, 2]
-    }
-]

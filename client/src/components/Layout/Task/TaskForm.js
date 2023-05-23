@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { ADD_TASK } from '../../../utils/mutations';
+import { CREATE_TASK } from '../../../utils/mutations';
 const TaskForm = () => {
     const [formState, setFormState] = useState({ title: '', description: '' });
-    const [addTask, { error }] = useMutation(ADD_TASK);
+    const [addTask, { error }] = useMutation(CREATE_TASK);
 
     const handleChange = (event) => {
         const { name, value } = event.target;

@@ -2,6 +2,7 @@ const db = require('../config/connection');
 const { User, Task } = require('../models');
 const userData = require('./userData.json');
 const taskData = require('./taskData.json');
+const mongoose = require('mongoose');
 
 db.once('open', async () => {
   try {
@@ -11,12 +12,20 @@ db.once('open', async () => {
     const users = await User.create(userData);
 
     for (let i = 0; i < taskData.length; i++) {
-      const { _id } = await Task.create(taskData[i]);
-      const randomUserIndex = Math.floor(Math.random() * users.length);
-      const user = users[randomUserIndex];
+      const { taskId, title, description, completed, user } = taskData[i];
+      const createdTask = await Task.create({
+        taskId,
+        title,
+        description,
+        completed,
+        user: mongoose.Types.ObjectId(user), // Cast user to ObjectId
+      });
 
-      user.tasks.push(_id);
-      await user.save();
+      const foundUser = await User.findOne({ username: user });
+      if (foundUser) {
+        foundUser.tasks.push(createdTask._id);
+        await foundUser.save();
+      }
     }
   } catch (err) {
     console.error(err);

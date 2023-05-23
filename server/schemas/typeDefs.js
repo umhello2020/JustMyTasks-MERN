@@ -27,7 +27,6 @@ const typeDefs = gql`
     task: Task!
     amount: Float!
     user: User!
-    createdAt: String!
   }
 
   type Query {
@@ -39,7 +38,7 @@ const typeDefs = gql`
   type Mutation {
     createUser(userId: ID!, username: String!, email: String!, password: String!): Auth
     updateUser(username: String!, email: String!, password: String!): User
-    login(email: String!, password: String!): Auth
+    login(username: String!, password: String!): Auth
     createTask(title: String!, description: String!): Task
     updateTask(taskId: ID!, title: String, description: String, completed: Boolean): Task
     deleteTask(taskId: ID!): Task!

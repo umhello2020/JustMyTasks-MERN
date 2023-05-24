@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Auth from '../utils/auth';
 import styles from './SignupPage.module.css';
+import apiEndpoints from '../utils/api';
 
 const SignupPage = () => {
   const [name, setName] = useState('');
@@ -9,7 +10,34 @@ const SignupPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    Auth.signup({ name, email, password });
+
+    const userData = {
+      name,
+      email,
+      password,
+    };
+
+    apiEndpoints.createUser(userData)
+      .then(createdUser => {
+        console.log(createdUser);
+        // Additional logic after successful user creation
+
+        // Call the signup method from Auth
+        Auth.signup(userData)
+          .then(({ token }) => {
+            // Additional logic after successful signup
+            Auth.setToken(token);
+          })
+          .catch(error => {
+            console.error(error);
+            // Additional error handling logic for signup
+          });
+      })
+      .catch(error => {
+        console.error(error);
+        // Additional error handling logic for createUser
+      });
+
     setName('');
     setEmail('');
     setPassword('');
@@ -52,4 +80,8 @@ const SignupPage = () => {
 };
 
 export default SignupPage;
+
+
+
+
 

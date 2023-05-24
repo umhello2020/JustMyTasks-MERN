@@ -1,39 +1,66 @@
 import decode from 'jwt-decode';
 
-class Auth {
-    static setToken(token) {
-        localStorage.setItem('token', token);
-}
+const signup = (userData) => {
+  return fetch('/api/users/signup', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userData),
+  })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        throw new Error('Something went wrong');
+      }
+    })
+    .then(({ token }) => {
+      setToken(token);
+      return decode(token);
+    });
+};
 
-    static getToken() {
-        return localStorage.getItem('token');
+const setToken = (token) => {
+  localStorage.setItem('token', token);
+};
+
+const getToken = () => {
+  return localStorage.getItem('token');
+};
+
+const logout = () => {
+  localStorage.removeItem('token');
+};
+
+const getProfile = () => {
+  return decode(getToken());
+};
+
+const loggedIn = () => {
+  const token = getToken();
+  return !!token && !isTokenExpired(token);
+};
+
+const isTokenExpired = (token) => {
+  try {
+    const decoded = decode(token);
+    if (decoded.exp < Date.now() / 1000) {
+      return true;
+    } else {
+      return false;
     }
+  } catch (err) {
+    return false;
+  }
+};
 
-    static logout() {
-        localStorage.removeItem('token');
-    }
-
-    static getProfile() {
-        return decode(this.getToken());
-    }
-
-    static loggedIn() {
-        const token = this.getToken();
-        return !!token && !this.isTokenExpired(token);
-    }
-
-    static isTokenExpired(token) {
-        try {
-            const decoded = decode(token);
-            if (decoded.exp < Date.now() / 1000) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (err) {
-            return false;
-        }
-    }
-}
-
-export default Auth;
+export default {
+  signup,
+  setToken,
+  getToken,
+  logout,
+  getProfile,
+  loggedIn,
+  isTokenExpired,
+};

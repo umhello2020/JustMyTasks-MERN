@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { createUser } from '../utils/api';
 
-const Register = ({ onRegister }) => {
+const Register = () => {
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
@@ -9,13 +11,13 @@ const Register = ({ onRegister }) => {
     e.preventDefault();
 
     // Validation checks
-    if (!username || !password) {
-      setError('Please enter both username and password.');
+    if (!username || !email || !password) {
+      setError('Please enter username, email, and password.');
       return;
     }
 
-    // Call the onRegister callback with the provided credentials
-    onRegister({ username, password })
+    // Call the createUser API method with the provided credentials
+    createUser({ username, email, password })
       .then((response) => {
         console.log('Registration successful:', response);
       })
@@ -25,6 +27,7 @@ const Register = ({ onRegister }) => {
       })
       .finally(() => {
         setUsername('');
+        setEmail('');
         setPassword('');
       });
   };
@@ -40,6 +43,13 @@ const Register = ({ onRegister }) => {
         required
       />
       <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email"
+        required
+      />
+      <input
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
@@ -52,3 +62,8 @@ const Register = ({ onRegister }) => {
 };
 
 export default Register;
+
+
+
+
+

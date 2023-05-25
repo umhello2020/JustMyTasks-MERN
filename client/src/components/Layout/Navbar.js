@@ -76,7 +76,7 @@ function Navbar() {
     <header className="navbar">
       <h1>
         <Link to="/" className="navbar__logo">
-          Todo App
+          Todo List
         </Link>
       </h1>
       <nav>{navigation}</nav>

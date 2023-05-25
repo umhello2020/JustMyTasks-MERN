@@ -6,7 +6,9 @@ const TaskCreate = ({ onCreate }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onCreate({ title, description });
+    if (onCreate && typeof onCreate === 'function') {
+      onCreate({ title, description });
+    }
     setTitle('');
     setDescription('');
   };
@@ -32,3 +34,5 @@ const TaskCreate = ({ onCreate }) => {
 };
 
 export default TaskCreate;
+
+

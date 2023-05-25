@@ -17,6 +17,13 @@ function MyPage() {
     }
   }, [userData.tasks]);
 
+  const handleTaskCreate = (taskData) => {
+    // Handle task creation logic
+    // Update tasks state after task creation
+    const createdTask = { id: 'new-task-id', ...taskData };
+    setTasks((prevTasks) => [...prevTasks, createdTask]);
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -26,9 +33,14 @@ function MyPage() {
       <h1 className={styles.myPageHeader}>Here are your tasks!</h1>
       <h2>Your Tasks</h2>
       <TaskList tasks={tasks} />
-      <TaskForm />
+      <div className={styles.taskForm}>
+        <TaskForm onTaskCreate={handleTaskCreate} />
+      </div>
     </div>
   );
 }
 
 export default MyPage;
+
+
+

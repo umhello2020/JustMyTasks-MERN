@@ -65,5 +65,33 @@ form textarea {
   margin-bottom: 20px;
 }
 
+/* App.css */
+.app-header {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.app-title {
+  font-size: 24px;
+  margin: 0;
+}
+
+.App {
+  text-align: center;
+}
+
+header {
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
 
 

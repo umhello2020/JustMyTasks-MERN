@@ -1,43 +1,31 @@
-/* Navbar container */
 .navbar {
-    background-color: #f2f2f2;
-    padding: 10px;
-  }
-  
-  /* Navbar logo */
-  .navbar__logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  /* Navbar links */
-  .navbar__links {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-  }
-  
-  /* Navbar link item */
-  .navbar__link-item {
-    margin-right: 10px;
-  }
-  
-  /* Navbar link */
-  .navbar__link {
-    color: #333;
-    text-decoration: none;
-  }
-  
-  /* Navbar link on hover */
-  .navbar__link:hover {
-    text-decoration: underline;
-  }
-  
-  /* Active navbar link */
-  .navbar__link--active {
-    font-weight: bold;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #f2f2f2;
+}
+
+.navbar__links {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar__link-item {
+  margin-right: 10px;
+  list-style-type: none;
+}
+
+.navbar__link {
+  color: #333;
+  text-decoration: none;
+}
+
+.navbar__logo {
+  color: #333;
+  text-decoration: none;
+}
+
   

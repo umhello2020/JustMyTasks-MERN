@@ -7,7 +7,7 @@ const typeDefs = gql`
   }
 
   type User {
-    userId: ID!
+    _id: ID!
     username: String!
     email: String!
     taskCount: Int!
@@ -15,7 +15,7 @@ const typeDefs = gql`
   }
 
   type Task {
-    taskId: ID!
+    _id: ID!
     title: String!
     description: String
     completed: Boolean
@@ -23,26 +23,26 @@ const typeDefs = gql`
   }
 
   type Donation {
-    donationId: ID!
+    _id: ID!
     task: Task!
     amount: Float!
     user: User!
   }
 
   type Query {
-    task(taskId: ID!): Task!
+    task(_id: ID!): Task!
     tasks: [Task!]!
     me: User
   }
 
   type Mutation {
-    createUser(userId: ID!, username: String!, email: String!, password: String!): Auth
+    createUser(_id: ID!, username: String!, email: String!, password: String!): Auth
     updateUser(username: String!, email: String!, password: String!): User
     login(username: String!, password: String!): Auth
     createTask(title: String!, description: String!): Task
-    updateTask(taskId: ID!, title: String, description: String, completed: Boolean): Task
-    deleteTask(taskId: ID!): Task!
-    createDonation(taskId: ID!, amount: Float!): Donation
+    updateTask(_id: ID!, title: String, description: String, completed: Boolean): Task
+    deleteTask(_id: ID!): Task!
+    createDonation(_id: ID!, amount: Float!): Donation
   }
 `;
 

@@ -17,16 +17,6 @@ function Navbar() {
         </Link>
       </li>
       <li className="navbar__link-item mx-1">
-        <Link to="/completed-tasks" className="navbar__link">
-          Completed Tasks
-        </Link>
-      </li>
-      <li className="navbar__link-item mx-1">
-        <Link to="/create-task" className="navbar__link">
-          Create Task
-        </Link>
-      </li>
-      <li className="navbar__link-item mx-1">
         <Link to="/donation" className="navbar__link">
           Donation
         </Link>

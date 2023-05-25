@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Auth from '../utils/auth';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import styles from './LoginPage.module.css';
 
 const LoginPage = () => {
@@ -34,7 +34,6 @@ const LoginPage = () => {
         />
         <button type="submit" className={styles.loginButton}>Login</button>
       </form>
-      <Link to="/register" className={styles.registerLink}>Register</Link>
     </div>
   );
 };

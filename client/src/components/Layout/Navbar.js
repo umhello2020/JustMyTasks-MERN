@@ -7,8 +7,33 @@ function Navbar() {
   const navigation = Auth.loggedIn() ? (
     <ul className="navbar__links flex-row">
       <li className="navbar__link-item mx-1">
-        <Link to="/orderHistory" className="navbar__link">
-          Order History
+        <Link to="/" className="navbar__link">
+          Home
+        </Link>
+      </li>
+      <li className="navbar__link-item mx-1">
+        <Link to="/tasks" className="navbar__link">
+          Tasks
+        </Link>
+      </li>
+      <li className="navbar__link-item mx-1">
+        <Link to="/completed-tasks" className="navbar__link">
+          Completed Tasks
+        </Link>
+      </li>
+      <li className="navbar__link-item mx-1">
+        <Link to="/create-task" className="navbar__link">
+          Create Task
+        </Link>
+      </li>
+      <li className="navbar__link-item mx-1">
+        <Link to="/donation" className="navbar__link">
+          Donation
+        </Link>
+      </li>
+      <li className="navbar__link-item mx-1">
+        <Link to="/account" className="navbar__link">
+          Account
         </Link>
       </li>
       <li className="navbar__link-item mx-1">
@@ -29,6 +54,21 @@ function Navbar() {
           Login
         </Link>
       </li>
+      <li className="navbar__link-item mx-1">
+        <Link to="/donation" className="navbar__link">
+          Donation
+        </Link>
+      </li>
+      <li className="navbar__link-item mx-1">
+        <Link to="/about" className="navbar__link">
+          About Us
+        </Link>
+      </li>
+      <li className="navbar__link-item mx-1">
+        <Link to="/contact" className="navbar__link">
+          Contact
+        </Link>
+      </li>
     </ul>
   );
 
@@ -36,16 +76,12 @@ function Navbar() {
     <header className="navbar">
       <h1>
         <Link to="/" className="navbar__logo">
-          <img src="shopping_bag_emoji.png" alt="Shopping bag emoji" className="navbar__logo-img" />
-          Shop-Shop
+          Todo App
         </Link>
       </h1>
-      <nav>
-        {navigation}
-      </nav>
+      <nav>{navigation}</nav>
     </header>
   );
 }
 
 export default Navbar;
-

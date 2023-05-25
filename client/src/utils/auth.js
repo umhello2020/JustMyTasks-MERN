@@ -21,6 +21,28 @@ const signup = (userData) => {
     });
 };
 
+const login = (userData) => {
+  return fetch('/api/users/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userData),
+  })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        throw new Error('Something went wrong');
+      }
+    })
+    .then(({ token }) => {
+      setToken(token);
+      return decode(token);
+    });
+};
+
+
 const setToken = (token) => {
   localStorage.setItem('token', token);
 };
@@ -55,8 +77,9 @@ const isTokenExpired = (token) => {
   }
 };
 
-export default {
+const Auth = {
   signup,
+  login,
   setToken,
   getToken,
   logout,
@@ -64,3 +87,5 @@ export default {
   loggedIn,
   isTokenExpired,
 };
+
+export default Auth;

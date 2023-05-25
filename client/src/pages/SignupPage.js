@@ -12,7 +12,7 @@ const SignupPage = () => {
     e.preventDefault();
 
     const userData = {
-      name,
+      username: name, // Changed from `name` to `username`
       email,
       password,
     };
@@ -29,12 +29,12 @@ const SignupPage = () => {
             Auth.setToken(token);
           })
           .catch(error => {
-            console.error(error);
+            console.error('Error signing up:', error);
             // Additional error handling logic for signup
           });
       })
       .catch(error => {
-        console.error(error);
+        console.error('Error creating user:', error);
         // Additional error handling logic for createUser
       });
 
@@ -80,6 +80,9 @@ const SignupPage = () => {
 };
 
 export default SignupPage;
+
+
+
 
 
 

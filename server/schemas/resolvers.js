@@ -5,18 +5,18 @@ const stripe = require('stripe')('your_stripe_secret_key');
 
 const resolvers = {
   Query: {
-    task: async (parent, { taskId }) => {
-      return Task.findById(taskId);
+    task: async (parent, { _id }) => {
+      return Task.findById(_id);
     },
     tasks: async (parent, args, context) => {
       if (context.user) {
-        return Task.find({ user: context.user.userId });
+        return Task.find({ user: context.user._id });
       }
       throw new AuthenticationError('You need to be logged in!');
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findById(context.user.userId).populate('tasks');
+        return User.findById(context.user._id).populate('tasks');
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -42,18 +42,18 @@ const resolvers = {
     updateUser: async (parent, { username, email, password }, context) => {
       if (context.user) {
         return User.findByIdAndUpdate(
-          context.user.userId,
+          context.user._id,
           { username, email, password },
           { new: true }
         );
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
+    login: async (parent, { username, password }) => {
+      const user = await User.findOne({ username });
 
       if (!user) {
-        throw new AuthenticationError('No user found with this email address');
+        throw new AuthenticationError('No user found with this username');
       }
 
       const correctPw = await user.isCorrectPassword(password);
@@ -71,73 +71,67 @@ const resolvers = {
         const task = await Task.create({
           title,
           description,
-          user: context.user.userId,
+          user: context.user._id,
         });
 
-        await User.findByIdAndUpdate(context.user.userId, {
-          $push: { tasks: task.taskId },
+        await User.findByIdAndUpdate(context.user._id, {
+          $push: { tasks: task._id },
         });
 
         return task;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    updateTask: async (parent, { taskId, title, description, completed }, context) => {
+    updateTask: async (parent, { _id, title, description, completed }, context) => {
       if (context.user) {
         const update = { title, description, completed };
         const options = { new: true };
 
-        return Task.findByIdAndUpdate(taskId, update, options);
+        return Task.findByIdAndUpdate(_id, update, options);
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    deleteTask: async (parent, { taskId }, context) => {
+    deleteTask: async (parent, { _id }, context) => {
       if (context.user) {
-        const task = await Task.findByIdAndRemove(taskId);
+        const task = await Task.findByIdAndRemove(_id);
 
-        await User.findByIdAndUpdate(context.user.userId, {
-          $pull: { tasks: task.taskId },
+        await User.findByIdAndUpdate(context.user._id, {
+          $pull: { tasks: task._id },
         });
 
         return task;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    createDonation: async (parent, { taskId, amount }, context) => {
+    createDonation: async (parent, { amount }, context) => {
       if (!context.user) {
         throw new AuthenticationError('You need to be logged in to create a donation');
       }
-
-      const task = await Task.findById(taskId);
-      if (!task) {
-        throw new Error('Task not found');
-      }
-
+    
       const donation = new Donation({
-        task: taskId,
         amount,
-        user: context.user.userId,
+        user: context.user._id,
       });
-
+    
       await donation.save();
-
-      // Create a Stripe PaymentIntent
+    
       const paymentIntent = await stripe.paymentIntents.create({
         amount: Math.round(amount * 100), // Stripe requires amount in cents
         currency: 'usd',
         payment_method_types: ['card'],
         metadata: {
           donationId: donation._id.toString(),
-          taskId: taskId.toString(),
-          userId: context.user.userId.toString(),
+          userId: context.user._id.toString(),
         },
       });
-
+      
+    
       return {
         donation,
         clientSecret: paymentIntent.client_secret,
       };
     },
+    
   },
 };
 

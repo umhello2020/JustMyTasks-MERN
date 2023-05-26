@@ -1,4 +1,5 @@
 # Just My Tasks
+![Screenshot 2023-05-26 001036](https://github.com/umhello2020/JustMyTasks-MERN/assets/119268105/72162c4f-bdaf-4671-bc9b-104c1fc2ad7e)
 
 Just My Tasks is a task management application that allows users to create, manage, and track their tasks. Users can sign up for an account, log in, create tasks, mark tasks as completed, and view their task list.
 

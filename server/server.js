@@ -13,7 +13,12 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: authMiddleware,
+  introspection: true,
+  context: ({ req }) => {
+    return { 
+    user: req.user 
+    };
+  }
 });
 
 // app.use(cors());

@@ -8,7 +8,7 @@ ul {
 }
 /* Navbar container */
 .navbar {
-    background-color: #f2f2f2;
+    background-color: #333;
     padding: 10px;
     margin-bottom: 20px;
   }
@@ -52,4 +52,12 @@ ul {
   .navbar__link--active {
     font-weight: bold;
   }
+
   
+
+/* 
+header.navbar {
+  background-color: yellow
+  padding: 10px;
+  margin-bottom: 20px;
+} */

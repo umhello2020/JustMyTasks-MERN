@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Auth from '../utils/auth';
-// import { Link } from 'react-router-dom';
 import styles from './LoginPage.module.css';
 
 const LoginPage = () => {
@@ -24,6 +23,7 @@ const LoginPage = () => {
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Username"
           required
+          className={styles.loginInput} // Add the class name
         />
         <input
           type="password"
@@ -31,6 +31,7 @@ const LoginPage = () => {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
           required
+          className={styles.loginInput} // Add the class name
         />
         <button type="submit" className={styles.loginButton}>Login</button>
       </form>
@@ -39,4 +40,5 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+
 

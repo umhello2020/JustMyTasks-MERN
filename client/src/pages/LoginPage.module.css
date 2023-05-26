@@ -6,15 +6,17 @@
 .login-form {
   max-width: 400px;
   margin: 0 auto;
+
 }
 
 .login-input {
-  width: 100%;
+  width: 200px; /* Set the desired width for the input field */
   padding: 10px;
   margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
 
 .login-button {
   display: inline-block;
@@ -32,3 +34,10 @@
 .login-button:hover {
   background-color: #0056b3;
 }
+ .loginInput {
+  width: 150px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+ }

@@ -3,7 +3,7 @@ import { gql } from '@apollo/client';
 export const CREATE_TASK = gql`
   mutation CreateTask($title: String!, $description: String!) {
     createTask(title: $title, description: $description) {
-      taskId
+      _id
       title
       description
       completed
@@ -12,9 +12,9 @@ export const CREATE_TASK = gql`
 `;
 
 export const UPDATE_TASK = gql`
-  mutation UpdateTask($taskId: ID!, $title: String, $description: String, $completed: Boolean) {
-    updateTask(taskId: $taskId, title: $title, description: $description, completed: $completed) {
-      taskId
+  mutation UpdateTask($_id: ID!, $title: String, $description: String, $completed: Boolean) {
+    updateTask(_id: $_id, title: $title, description: $description, completed: $completed) {
+      _id
       title
       description
       completed
@@ -23,9 +23,9 @@ export const UPDATE_TASK = gql`
 `;
 
 export const DELETE_TASK = gql`
-  mutation DeleteTask($taskId: ID!) {
-    deleteTask(taskId: $taskId) {
-      taskId
+  mutation DeleteTask($_id: ID!) {
+    deleteTask(_id: $_id) {
+      _id
       title
       description
       completed
@@ -34,13 +34,13 @@ export const DELETE_TASK = gql`
 `;
 
 export const CREATE_DONATION = gql`
-    mutation CreateDonation($taskId: ID!, $amount: Float!) {
-        createDonation(taskId: $taskId, amount: $amount) {
+    mutation CreateDonation($_id: ID!, $amount: Float!) {
+        createDonation(_id: $_id, amount: $amount) {
             donationId
             amount
             createdAt
             task {
-                taskId
+                _id
                 title
                 description
                 completed
@@ -51,7 +51,7 @@ export const CREATE_DONATION = gql`
                 email
                 taskCount
                 tasks {
-                    taskId
+                    _id
                     title
                     description
                     completed
@@ -71,7 +71,7 @@ export const LOGIN = gql`
                 email
                 taskCount
                 tasks {
-                    taskId
+                    _id
                     title
                     description
                     completed
@@ -91,7 +91,7 @@ export const CREATE_USER = gql`
                 email
                 taskCount
                 tasks {
-                    taskId
+                    _id
                     title
                     description
                     completed
@@ -109,7 +109,7 @@ export const UPDATE_USER = gql`
             email
             taskCount
             tasks {
-                taskId
+                _id
                 title
                 description
                 completed

@@ -1,9 +1,9 @@
 import { gql } from '@apollo/client';
 
 export const GET_TASK = gql`
-  query GetTask($taskId: ID!) {
-    task(taskId: $taskId) {
-      taskId
+  query GetTask($_id: ID!) {
+    task(_id: $_id) {
+      _id
       title
       description
       completed
@@ -14,7 +14,7 @@ export const GET_TASK = gql`
 export const GET_TASKS = gql`
   query GetTasks {
     tasks {
-      taskId
+      _id
       title
       description
       completed
@@ -30,7 +30,7 @@ export const GET_ME = gql`
       email
       taskCount
       tasks {
-        taskId
+        _id
         title
         description
         completed

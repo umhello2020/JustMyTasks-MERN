@@ -18,7 +18,7 @@ module.exports = {
 
   async updateTask({ params, body }, res) {
     try {
-      const updatedTask = await Task.findByIdAndUpdate({ taskId: params.taskId }, body, { new: true });
+      const updatedTask = await Task.findByIdAndUpdate({ _id: params._id }, body, { new: true });
 
       if (!updatedTask) {
         return res.status(404).json({ message: 'Task not found' });
@@ -33,7 +33,7 @@ module.exports = {
 
   async deleteTask({ params }, res) {
     try {
-      const deletedTask = await Task.findByIdAndDelete({ taskId: params.taskId });
+      const deletedTask = await Task.findByIdAndDelete({ _id: params._id });
 
       if (!deletedTask) {
         return res.status(404).json({ message: 'Task not found' });

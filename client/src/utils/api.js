@@ -41,8 +41,8 @@ const apiEndpoints = {
       });
   },
 
-  updateTask: (taskId, taskData) => {
-    return api.put(`/tasks/${taskId}`, taskData)
+  updateTask: (_id, taskData) => {
+    return api.put(`/tasks/${_id}`, taskData)
       .then(response => response.data)
       .catch(error => {
         console.error('Error updating task:', error);

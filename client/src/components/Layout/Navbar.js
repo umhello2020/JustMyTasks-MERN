@@ -66,7 +66,7 @@ function Navbar() {
     <header className="navbar">
       <h1>
         <Link to="/" className="navbar__logo">
-          Todo List
+         Just My Tasks
         </Link>
       </h1>
       <nav>{navigation}</nav>

@@ -1,11 +1,33 @@
 import React, { useState } from 'react';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/client';
 import { CREATE_TASK } from '../../../utils/mutations';
+import { GET_ME, GET_TASKS } from '../../../utils/queries';
 import styles from './TaskForm.module.css';
 
 const TaskForm = () => {
   const [formState, setFormState] = useState({ title: '', description: '' });
-  const [createTask, { error }] = useMutation(CREATE_TASK);
+  const [createTask, { error }] = useMutation(CREATE_TASK, {
+    update(cache, { data: { createTask } }) {
+      try {
+        const { me } = cache.readQuery({ query: GET_ME });
+        cache.writeQuery({
+          query: GET_ME,
+          data: { me: { ...me, tasks: [...me.tasks, createTask] } },
+        });
+      } catch (e) {
+        console.error(e);
+      }
+      try {
+        const { tasks } = cache.readQuery({ query: GET_TASKS });
+        cache.writeQuery({
+          query: GET_TASKS,
+          data: { tasks: [...tasks, createTask] },
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    },
+  });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -57,5 +79,3 @@ const TaskForm = () => {
 };
 
 export default TaskForm;
-
-

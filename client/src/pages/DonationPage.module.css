@@ -1,0 +1,45 @@
+/* DonationPage.module.css */
+
+.donationPage {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .donationPage form {
+    margin-top: 20px;
+  }
+  
+  .donationPage label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .donationPage input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .donationPage button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .donationPage button:hover {
+    background-color: #0056b3;
+  }
+  
+  .donationPage .CardElement {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  

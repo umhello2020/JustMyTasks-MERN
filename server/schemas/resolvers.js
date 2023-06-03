@@ -71,7 +71,7 @@ const resolvers = {
 
         return task;
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in to create a task');
     },
     updateTask: async (parent, { taskId, title, description, completed }, context) => {
       if (context.user) {
@@ -80,7 +80,7 @@ const resolvers = {
 
         return Task.findByIdAndUpdate(taskId, update, options);
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in to update a task');
     },
     deleteTask: async (parent, { taskId }, context) => {
       if (context.user) {
@@ -92,7 +92,7 @@ const resolvers = {
 
         return task;
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in to delete a task');
     },
     createDonation: async (parent, { amount }, context) => {
       if (!context.user) {
@@ -116,7 +116,6 @@ const resolvers = {
         },
       });
 
-
       return {
         donation,
         clientSecret: paymentIntent.client_secret,
@@ -126,6 +125,7 @@ const resolvers = {
 };
 
 module.exports = resolvers;
+
 
 
 

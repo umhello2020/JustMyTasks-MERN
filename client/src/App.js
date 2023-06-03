@@ -10,14 +10,15 @@ import SignupPage from './pages/SignupPage';
 import NotFound from './pages/NotFound';
 import Nav from './components/Layout/Navbar';
 import TaskPage from './pages/MyPage';
-import DonationPage from './pages/DonationPage'; // Import the DonationPage component
+import DonationPage from './pages/DonationPage';
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:3001/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('id_token');
+  // Ensure you're using the correct key to retrieve the token from localStorage
+  const token = localStorage.getItem('jwtToken');
   return {
     headers: {
       ...headers,
@@ -42,7 +43,7 @@ function App() {
             <Route exact path="/tasks" element={<TaskPage />} />
             <Route exact path="/login" element={<LoginPage />} />
             <Route exact path="/signup" element={<SignupPage />} />
-            <Route exact path="/donate" element={<DonationPage />} /> {/* Add the donation route */}
+            <Route exact path="/donate" element={<DonationPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

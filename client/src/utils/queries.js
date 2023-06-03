@@ -39,3 +39,13 @@ export const GET_ME = gql`
   }
 `;
 
+export const CREATE_TASK = gql`
+  mutation CreateTask($title: String!, $description: String!) {
+    createTask(title: $title, description: $description) {
+      _id
+      title
+      description
+      completed
+    }
+  }
+`;

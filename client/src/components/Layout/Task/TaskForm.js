@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { CREATE_TASK } from '../../../utils/mutations';
 import { GET_ME, GET_TASKS } from '../../../utils/queries';
 import styles from './TaskForm.module.css';
@@ -44,6 +44,11 @@ const TaskForm = () => {
     try {
       await createTask({
         variables: { ...formState },
+        context: {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        },
       });
 
       setFormState({ title: '', description: '' });
@@ -79,3 +84,4 @@ const TaskForm = () => {
 };
 
 export default TaskForm;
+

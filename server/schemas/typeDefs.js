@@ -1,29 +1,29 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+  type Auth {
+    token: ID!
+    user: User!
+  }
+
   type User {
-    _id: ID
-    username: String
-    email: String
+    _id: ID!
+    username: String!
+    email: String!
     tasks: [Task]
   }
 
   type Task {
-    _id: ID
-    title: String
+    _id: ID!
+    title: String!
     description: String
     completed: Boolean
     user: User
   }
 
   type Donation {
-    _id: ID
-    amount: Float
-    user: User
-  }
-
-  type Auth {
-    token: ID!
+    _id: ID!
+    amount: Float!
     user: User
   }
 
@@ -31,7 +31,7 @@ const typeDefs = gql`
     task(_id: ID!): Task
     tasks: [Task]
     me: User
-    donation: Donation # Add the donation field to the Query type
+    donation: Donation 
   }
 
   type Mutation {

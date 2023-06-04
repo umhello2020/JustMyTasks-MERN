@@ -3,19 +3,25 @@ const Task = require('../models/Task');
 module.exports = {
   async createTask({ body }, res) {
     try {
-      const task = await Task.create(body);
-
+      const { title, description } = body;
+  
+      if (!title || !description) {
+        return res.status(400).json({ message: 'Title and description are required fields' });
+      }
+  
+      const task = await Task.create({ title, description });
+  
       if (!task) {
         return res.status(400).json({ message: 'Something went wrong!' });
       }
-
+  
       res.json(task);
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: 'Error creating task' });
     }
   },
-
+  
   async updateTask({ params, body }, res) {
     try {
       const updatedTask = await Task.findByIdAndUpdate({ _id: params._id }, body, { new: true });

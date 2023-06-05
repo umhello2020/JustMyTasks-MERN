@@ -6,11 +6,14 @@ const secret = 'mysecretsshhhhh';
 const expiration = '2h';
 
 const authMiddleware = (req, res, next) => {
+  console.log('Hello')
   let token = req.headers.authorization?.split(' ')[1] || '';
 
   if (!token) {
     return res.status(400).json({ message: 'You have no token!' });
   }
+
+  console.log('Token:', token); // Log the token value
 
   try {
     const { data } = jwt.verify(token, secret, { maxAge: expiration });
@@ -29,8 +32,9 @@ const signToken = ({ username, email, _id }) => {
 };
 
 const login = async (credentials) => {
+  console.log('logged in')
   const { username, password } = credentials;
-
+  console.log('Searching for user:', username);
   const user = await User.findOne({ username });
 
   if (!user) {

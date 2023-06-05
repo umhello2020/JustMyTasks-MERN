@@ -2,7 +2,7 @@ const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
-const cors = require('cors'); // Uncomment this line
+const cors = require('cors'); 
 const userRoutes = require('./routes/api/user-routes');
 
 const { typeDefs, resolvers } = require('./schemas');
@@ -28,6 +28,7 @@ const server = new ApolloServer({
   resolvers,
   introspection: true,
   context: ({ req }) => {
+    console.log(req.user)
     return { 
       user: req.user 
     };
